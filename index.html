@@ -1,0 +1,935 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+<title>Оценка риска варикозной болезни - Доктор Кобилбеков Б.</title>
+<meta name="color-scheme" content="light">
+<style>
+  :root{
+    --brand:#0A66C2;
+    --ok:#16A34A;
+    --warn:#F59E0B;
+    --bad:#DC2626;
+    --page:linear-gradient(135deg, #F6F8FC 0%, #E8F2FF 100%);
+    --panel:#fff;
+    --text:#0F172A;
+    --muted:#64748B;
+    --line:#E6ECF5;
+    --radius:20px;
+    --shadow:0 20px 60px rgba(2,8,23,.08), 0 8px 25px rgba(2,8,23,.05);
+    --shadow-hover:0 25px 80px rgba(2,8,23,.12), 0 12px 35px rgba(2,8,23,.08);
+    --wrap:980px;
+    --gradient-brand:linear-gradient(135deg, var(--brand) 0%, #3B82F6 100%);
+    --gradient-success:linear-gradient(135deg, var(--ok) 0%, #22C55E 100%);
+    --gradient-warning:linear-gradient(135deg, var(--warn) 0%, #FBBF24 100%);
+    --gradient-danger:linear-gradient(135deg, var(--bad) 0%, #EF4444 100%);
+  }
+  *{box-sizing:border-box}
+  html,body{height:100%}
+  @keyframes fadeInUp {
+    from { opacity:0; transform:translateY(30px) }
+    to { opacity:1; transform:translateY(0) }
+  }
+  @keyframes pulse {
+    0%, 100% { transform:scale(1) }
+    50% { transform:scale(1.05) }
+  }
+  @keyframes slideInLeft {
+    from { opacity:0; transform:translateX(-30px) }
+    to { opacity:1; transform:translateX(0) }
+  }
+  
+  body{
+    margin:0; 
+    font:16px/1.6 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+    color:var(--text); 
+    background:var(--page);
+    min-height:100vh;
+    animation:fadeInUp 0.8s ease-out;
+  }
+  
+  .wrap{
+    max-width:var(--wrap); 
+    margin:0 auto; 
+    padding:20px; 
+    padding-bottom:140px;
+  }
+  
+  .head{
+    display:flex; 
+    align-items:center; 
+    gap:16px; 
+    margin:12px 0 24px;
+    animation:slideInLeft 0.6s ease-out;
+  }
+  
+  .logo{
+    width:52px; 
+    height:52px; 
+    display:grid; 
+    place-items:center; 
+    color:#fff; 
+    font-weight:800;
+    font-size:18px;
+    background:var(--gradient-brand); 
+    border-radius:16px; 
+    box-shadow:var(--shadow);
+    transition:all 0.3s cubic-bezier(0.4,0,0.2,1);
+    position:relative;
+    overflow:hidden;
+  }
+  
+  .logo::before{
+    content:'';
+    position:absolute;
+    inset:0;
+    background:linear-gradient(45deg, transparent, rgba(255,255,255,0.2), transparent);
+    transform:translateX(-100%);
+    transition:transform 0.6s;
+  }
+  
+  .logo:hover{
+    transform:translateY(-2px);
+    box-shadow:var(--shadow-hover);
+    animation:pulse 0.6s ease-in-out;
+  }
+  
+  .logo:hover::before{
+    transform:translateX(100%);
+  }
+  h1{
+    font-size:28px; 
+    margin:0; 
+    font-weight:700;
+    background:var(--gradient-brand);
+    -webkit-background-clip:text;
+    -webkit-text-fill-color:transparent;
+    background-clip:text;
+  }
+  
+  .sub{
+    color:var(--muted); 
+    font-size:15px; 
+    margin-top:6px;
+    line-height:1.5;
+  }
+  
+  .card{
+    background:var(--panel); 
+    border-radius:var(--radius); 
+    box-shadow:var(--shadow);
+    padding:24px; 
+    margin:20px 0;
+    border:1px solid var(--line);
+    transition:all 0.3s cubic-bezier(0.4,0,0.2,1);
+    position:relative;
+    overflow:hidden;
+    animation:fadeInUp 0.6s ease-out;
+  }
+  
+  .card::before{
+    content:'';
+    position:absolute;
+    top:0;
+    left:0;
+    right:0;
+    height:4px;
+    background:var(--gradient-brand);
+    transform:scaleX(0);
+    transition:transform 0.3s ease;
+  }
+  
+  .card:hover{
+    transform:translateY(-4px);
+    box-shadow:var(--shadow-hover);
+  }
+  
+  .card:hover::before{
+    transform:scaleX(1);
+  }
+  .card h2{font-size:18px; margin:0 0 10px}
+  .grid{display:grid; gap:10px}
+  @media(min-width:720px){ .grid.two{grid-template-columns:1fr 1fr} }
+  .row{display:flex; align-items:center; justify-content:space-between; gap:10px; padding:10px 12px; border:1px solid var(--line); border-radius:12px}
+  .row label{font-size:15px}
+  .muted{color:var(--muted)}
+  .hint{font-size:13px; color:var(--muted); margin-top:8px}
+  .radio3{display:flex; gap:6px}
+  .radio3 .opt{
+    position:relative; display:inline-flex; align-items:center; justify-content:center;
+    min-width:34px; height:34px; padding:0 10px; border-radius:10px; border:1px solid var(--line);
+    background:#fafbff; cursor:pointer; user-select:none; font-size:13px;
+  }
+  .radio3 input{position:absolute; inset:0; opacity:0; pointer-events:none}
+  .radio3 input:checked + .opt{border-color:var(--brand); outline:2px solid color-mix(in srgb, var(--brand) 25%, transparent)}
+  .checkline{display:flex; align-items:center; gap:10px}
+  .checkline input[type="checkbox"]{width:18px; height:18px}
+  .num{display:flex; align-items:center; gap:8px}
+  .num input[type="number"], .sel{
+    width:100%; padding:10px 12px; border:1px solid var(--line); border-radius:12px; background:#fff; font-size:15px;
+  }
+  .badge{display:inline-flex; align-items:center; gap:8px; padding:6px 10px; border-radius:999px; font-size:13px; font-weight:600}
+  .b-low{background:#ECFDF5; color:var(--ok); border:1px solid #BAE6D3}
+  .b-mid{background:#FFFBEB; color:#B45309; border:1px solid #FDE68A}
+  .b-high{background:#FEF2F2; color:var(--bad); border:1px solid #FECACA}
+  .bar{height:12px; background:#EEF2FF; border-radius:999px; overflow:hidden; border:1px solid var(--line)}
+  .bar > b{display:block; height:100%; width:0%; background:linear-gradient(90deg,#93C5FD,var(--brand)); transition:width .4s}
+  .actions{
+    position:fixed; left:0; right:0; bottom:0; padding:12px 14px; background:rgba(255,255,255,.75);
+    backdrop-filter:blur(8px); border-top:1px solid var(--line);
+  }
+  .actions .inner{max-width:var(--wrap); margin:0 auto; display:flex; gap:10px}
+  .btn{
+    appearance:none; 
+    border:none; 
+    border-radius:16px; 
+    padding:14px 20px; 
+    font-weight:700; 
+    cursor:pointer;
+    background:var(--gradient-brand); 
+    color:#fff; 
+    box-shadow:var(--shadow);
+    transition:all 0.3s cubic-bezier(0.4,0,0.2,1);
+    position:relative;
+    overflow:hidden;
+    font-size:15px;
+  }
+  
+  .btn::before{
+    content:'';
+    position:absolute;
+    inset:0;
+    background:linear-gradient(45deg, transparent, rgba(255,255,255,0.2), transparent);
+    transform:translateX(-100%);
+    transition:transform 0.6s;
+  }
+  
+  .btn:hover{
+    transform:translateY(-2px);
+    box-shadow:var(--shadow-hover);
+  }
+  
+  .btn:hover::before{
+    transform:translateX(100%);
+  }
+  
+  .btn:active{
+    transform:translateY(0);
+  }
+  
+  .btn.secondary{
+    background:#fff; 
+    color:var(--text); 
+    border:2px solid var(--line);
+  }
+  
+  .btn.secondary:hover{
+    border-color:var(--brand);
+    color:var(--brand);
+  }
+  
+  .btn.warn{
+    background:var(--gradient-danger);
+  }
+  .res h3{margin:6px 0 8px}
+  .list{margin:8px 0 0; padding-left:18px}
+  .callout{
+    border:1px solid #FECACA; background:#FEF2F2; color:#991B1B; padding:12px; border-radius:12px; font-size:14px
+  }
+  details{border:1px dashed var(--line); border-radius:12px; padding:10px 12px}
+  details summary{cursor:pointer; font-weight:600}
+  .doctor-card{
+    background:linear-gradient(135deg, #fff 0%, #f8faff 100%);
+    border:2px solid var(--brand);
+  }
+  
+  .doctor-info{
+    display:flex;
+    gap:20px;
+    align-items:center;
+  }
+  
+  .doctor-avatar{
+    position:relative;
+    width:80px;
+    height:80px;
+    border-radius:50%;
+    overflow:hidden;
+    box-shadow:var(--shadow);
+  }
+  
+  .doctor-avatar img{
+    width:100%;
+    height:100%;
+    object-fit:cover;
+  }
+  
+  .avatar-placeholder{
+    width:100%;
+    height:100%;
+    background:var(--gradient-brand);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    color:#fff;
+    font-weight:700;
+    font-size:24px;
+  }
+  
+  .doctor-details h3{
+    margin:0 0 8px;
+    font-size:22px;
+    color:var(--brand);
+    font-weight:700;
+  }
+  
+  .doctor-title{
+    font-weight:600;
+    color:var(--text);
+    margin-bottom:8px;
+    font-size:16px;
+  }
+  
+  .doctor-experience{
+    color:var(--muted);
+    margin-bottom:12px;
+    line-height:1.5;
+  }
+  
+  .doctor-contact{
+    display:flex;
+    flex-direction:column;
+    gap:6px;
+  }
+  
+  .contact-item{
+    font-size:14px;
+    color:var(--muted);
+    display:flex;
+    align-items:center;
+    gap:8px;
+  }
+  
+  .contact-card{
+    background:linear-gradient(135deg, #f8faff 0%, #fff 100%);
+    border:2px solid var(--ok);
+  }
+  
+  .contact-intro p{
+    color:var(--muted);
+    margin:0 0 20px;
+    line-height:1.6;
+  }
+  
+  .contact-form{
+    display:flex;
+    flex-direction:column;
+    gap:20px;
+  }
+  
+  .form-row{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:16px;
+  }
+  
+  .form-field{
+    display:flex;
+    flex-direction:column;
+    gap:8px;
+  }
+  
+  .field-label{
+    font-weight:600;
+    color:var(--text);
+    font-size:14px;
+  }
+  
+  .form-field input,
+  .form-field select,
+  .form-field textarea{
+    padding:12px 16px;
+    border:2px solid var(--line);
+    border-radius:12px;
+    font-size:15px;
+    transition:all 0.3s ease;
+    background:#fff;
+  }
+  
+  .form-field input:focus,
+  .form-field select:focus,
+  .form-field textarea:focus{
+    outline:none;
+    border-color:var(--brand);
+    box-shadow:0 0 0 3px rgba(10,102,194,0.1);
+  }
+  
+  .form-field textarea{
+    resize:vertical;
+    font-family:inherit;
+    line-height:1.5;
+  }
+  
+  .form-actions{
+    display:flex;
+    gap:12px;
+    margin-top:8px;
+  }
+  
+  @media (max-width: 600px) {
+    .form-row{
+      grid-template-columns:1fr;
+    }
+    
+    .form-actions{
+      flex-direction:column;
+    }
+  }
+  
+  .footer{margin:14px 0; color:var(--muted); font-size:12px}
+  
+  @media (max-width: 600px) {
+    .doctor-info{
+      flex-direction:column;
+      text-align:center;
+    }
+    
+    .doctor-avatar{
+      width:100px;
+      height:100px;
+    }
+    
+    .btn{
+      font-size:14px;
+      padding:12px 16px;
+    }
+    
+    .actions .inner{
+      flex-wrap:wrap;
+    }
+  }
+  
+  @media print{
+    .actions{display:none}
+    body{background:#fff}
+    .wrap{padding-bottom:0}
+  }
+</style>
+</head>
+<body>
+  <div class="wrap">
+    <div class="head">
+      <div class="logo">KB</div>
+      <div>
+        <h1>Оценка риска варикозной болезни</h1>
+        <div class="sub">Отметьте симптомы и факторы. Инструмент не ставит диагноз и не заменяет очную консультацию.</div>
+      </div>
+    </div>
+
+    <!-- Информация о враче -->
+    <div class="card doctor-card">
+      <div class="doctor-info">
+        <div class="doctor-avatar">
+          <img src="http://ipovszrt.tj/wp-content/uploads/2023/03/Kobilbekov-Bakhodur-scaled.jpg" alt="Доктор Кобилбеков Баходур" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex'">
+          <div class="avatar-placeholder" style="display:none">
+            <span>KB</span>
+          </div>
+        </div>
+        <div class="doctor-details">
+          <h3>Доктор Кобилбеков Баходур</h3>
+          <div class="doctor-title">Сосудистый хирург, флеболог</div>
+          <div class="doctor-experience">Специализируется на лечении варикозной болезни и заболеваний венозной системы</div>
+          <div class="doctor-contact">
+            <span class="contact-item">📞 Консультация по записи</span>
+            <span class="contact-item">🏥 Клиника сосудистой хирургии</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Профиль -->
+    <div class="card">
+      <h2>1) Общие данные</h2>
+      <div class="grid two">
+        <div class="row">
+          <label class="num" style="width:100%">
+            <span>Возраст</span>
+            <input id="age" type="number" min="10" max="100" step="1" placeholder="например, 38">
+          </label>
+        </div>
+        <div class="row">
+          <label style="width:100%">
+            <div class="muted" style="margin-bottom:6px">Пол</div>
+            <select id="sex" class="sel">
+              <option value="unknown">Не указывать</option>
+              <option value="female">Женский</option>
+              <option value="male">Мужской</option>
+            </select>
+          </label>
+        </div>
+      </div>
+      <div class="hint">Возраст влияет на расчёт баллов (45–59 лет: +1; ≥60 лет: +2).</div>
+    </div>
+
+    <!-- Симптомы -->
+    <div class="card">
+      <h2>2) Симптомы (субъективные)</h2>
+      <div id="symptoms"></div>
+      <div class="hint">Оцените, насколько часто вас беспокоит каждый симптом: «Нет», «Иногда», «Часто».</div>
+    </div>
+
+    <!-- Признаки -->
+    <div class="card">
+      <h2>3) Признаки (объективные)</h2>
+      <div id="signs"></div>
+      <div class="hint">«Иногда» считается как половинный балл, «Часто/выражено» — как полный.</div>
+    </div>
+
+    <!-- Факторы риска -->
+    <div class="card">
+      <h2>4) Факторы риска</h2>
+      <div id="factors" class="grid"></div>
+      <div class="hint">Можно отметить сразу несколько. Для беременности/гормонов выбор пола необязателен.</div>
+    </div>
+
+    <!-- Красные флаги -->
+    <div class="card">
+      <h2>5) Срочно к врачу, если отмечается:</h2>
+      <div id="redflags" class="grid"></div>
+      <div class="hint">При наличии этих признаков нужно немедленно обратиться за неотложной помощью (вызов скорой/ER).</div>
+    </div>
+
+    <!-- Результат -->
+    <div id="result" class="card res" style="display:none">
+      <h2>Итоговая оценка</h2>
+      <div id="urgent" class="callout" style="display:none"></div>
+
+      <div id="okblock" style="display:none">
+        <div style="display:flex; align-items:center; justify-content:space-between; gap:10px">
+          <div id="badge" class="badge b-low">Низкая вероятность</div>
+          <div style="min-width:160px; width:40%">
+            <div class="bar"><b id="bar" style="width:0%"></b></div>
+            <div class="muted" style="font-size:12px;margin-top:4px">Индекс вероятности: <span id="scoreLabel">0/20</span></div>
+          </div>
+        </div>
+
+        <h3>Что это значит</h3>
+        <div id="meaning" class="muted"></div>
+
+        <h3>Персональные советы</h3>
+        <ul id="advice" class="list"></ul>
+
+        <details style="margin-top:10px">
+          <summary>Подробности расчёта</summary>
+          <div id="details" style="margin-top:8px; font-size:14px"></div>
+        </details>
+
+        <div class="footer">⚠️ Инструмент носит информативный характер и не является медицинским диагнозом. При стойких или нарастающих симптомах обратитесь к врачу (флеболог/сосудистый хирург). Для уточнения состояния показано УЗИ вен (дуплекс-сканирование).</div>
+      </div>
+    </div>
+
+    <!-- Форма для связи -->
+    <div id="contactForm" class="card contact-card" style="display:none">
+      <h2>Записаться на консультацию</h2>
+      <div class="contact-intro">
+        <p>Если результат оценки показал среднюю или высокую вероятность варикозной болезни, рекомендуется консультация специалиста.</p>
+      </div>
+      
+      <form class="contact-form" onsubmit="submitContactForm(event)">
+        <div class="form-row">
+          <label class="form-field">
+            <span class="field-label">Имя *</span>
+            <input type="text" name="name" required placeholder="Ваше имя">
+          </label>
+          <label class="form-field">
+            <span class="field-label">Телефон *</span>
+            <input type="tel" name="phone" required placeholder="+7 (___) ___-__-__">
+          </label>
+        </div>
+        
+        <label class="form-field">
+          <span class="field-label">Email</span>
+          <input type="email" name="email" placeholder="example@mail.com">
+        </label>
+        
+        <label class="form-field">
+          <span class="field-label">Предпочтительное время для звонка</span>
+          <select name="time">
+            <option value="">Выберите время</option>
+            <option value="morning">Утром (9:00-12:00)</option>
+            <option value="afternoon">Днем (12:00-17:00)</option>
+            <option value="evening">Вечером (17:00-20:00)</option>
+          </select>
+        </label>
+        
+        <label class="form-field">
+          <span class="field-label">Дополнительная информация</span>
+          <textarea name="message" rows="4" placeholder="Опишите ваши симптомы или вопросы..."></textarea>
+        </label>
+        
+        <div class="form-actions">
+          <button type="submit" class="btn">Отправить заявку</button>
+          <button type="button" class="btn secondary" onclick="hideContactForm()">Отмена</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Фиксированные кнопки -->
+  <div class="actions">
+    <div class="inner">
+      <button class="btn" onclick="calculate()">Рассчитать</button>
+      <button class="btn secondary" onclick="resetAll()">Сбросить</button>
+      <button class="btn secondary" onclick="showContactForm()" id="consultBtn" style="display:none">🩺 Консультация</button>
+      <button class="btn secondary" onclick="copyConclusion()">Скопировать заключение</button>
+      <button class="btn secondary" onclick="window.print()">Печать / PDF</button>
+    </div>
+  </div>
+
+<script>
+/* ========= ШАБЛОНЫ (можно менять/добавлять пункты) ========= */
+
+// 2) Симптомы (0=нет, 1=иногда, 2=часто)
+const SYMPTOMS = [
+  {id:'heaviness', label:'Тяжесть/распирание в ногах к вечеру'},
+  {id:'ache',      label:'Ноющая тупая боль в ногах'},
+  {id:'cramps',    label:'Ночные судороги голеней/стоп'},
+  {id:'itch',      label:'Зуд кожи голеней'},
+  {id:'restless',  label:'Беспокойные ноги'},
+  {id:'worse',     label:'Хуже после длительного стояния/сидения'},
+  {id:'better',    label:'Облегчение при подъёме ног/компрессии'}
+];
+
+// 3) Признаки (0=нет, 1=иногда (0.5 веса), 2=часто/выражено (1 веса))
+const SIGNS = [
+  {id:'visible', label:'Видимые извитые вены / сосудистые звёздочки', weight:3},
+  {id:'edema',   label:'Отёк лодыжек/голеней к вечеру',               weight:2},
+  {id:'skin',    label:'Потемнение кожи, экзема около лодыжек',       weight:4},
+  {id:'ulcer',   label:'Долго незаживающая язва на голени',           weight:6}
+];
+
+// 4) Факторы риска (checkbox, pts)
+const FACTORS = [
+  {id:'family',   label:'Варикоз/тромбы у близких родственников', pts:2},
+  {id:'standing', label:'Длительная работа стоя/на ногах',        pts:2},
+  {id:'sitting',  label:'Длительное сидение (офис, поездки >2ч)',  pts:1},
+  {id:'obesity',  label:'Избыточный вес (ИМТ ≥30)',                pts:2},
+  {id:'pregnancy',label:'Беременность / послеродовый период',      pts:2},
+  {id:'hormones', label:'Гормональные контрацептивы / ЗГТ',        pts:1},
+  {id:'dvt',      label:'Перенесённый тромбоз глубоких вен',       pts:3},
+  {id:'trauma',   label:'Травма/операция на нижних конечностях',   pts:1},
+  {id:'constip',  label:'Хронические запоры',                      pts:1},
+  {id:'smoke',    label:'Курение',                                 pts:1},
+  {id:'lifting',  label:'Регулярные подъёмы тяжестей',             pts:1}
+];
+
+// 5) Красные флаги (если отмечены — показываем срочную рекомендацию)
+const REDFLAGS = [
+  {id:'oneleg', label:'Внезапный односторонний отёк, боль, покраснение и тепло в голени'},
+  {id:'chest',  label:'Внезапная одышка, боль в груди или кашель с кровью'}
+];
+
+/* ========= Генерация интерфейса ========= */
+
+function mountRadio3(container, groupId) {
+  const map = [
+    {val:0, text:'Нет'},
+    {val:1, text:'Иногда'},
+    {val:2, text:'Часто'}
+  ];
+  const box = document.createElement('div');
+  box.className = 'radio3';
+  map.forEach(opt=>{
+    const id = `${groupId}_${opt.val}`;
+    const w = document.createElement('label');
+    w.style.position='relative';
+    const input = document.createElement('input');
+    input.type='radio'; input.name=groupId; input.id=id; input.value=opt.val;
+    const btn = document.createElement('span');
+    btn.className='opt'; btn.textContent = opt.text;
+    w.appendChild(input); w.appendChild(btn);
+    box.appendChild(w);
+  });
+  container.appendChild(box);
+}
+
+function buildUI(){
+  const sRoot = document.getElementById('symptoms');
+  SYMPTOMS.forEach(item=>{
+    const row = document.createElement('div');
+    row.className='row';
+    const lab = document.createElement('label'); lab.textContent = item.label;
+    row.appendChild(lab);
+    mountRadio3(row, 'sym_'+item.id);
+    sRoot.appendChild(row);
+  });
+
+  const signRoot = document.getElementById('signs');
+  SIGNS.forEach(item=>{
+    const row = document.createElement('div');
+    row.className='row';
+    const lab = document.createElement('label'); lab.textContent = item.label;
+    row.appendChild(lab);
+    mountRadio3(row, 'sign_'+item.id);
+    signRoot.appendChild(row);
+  });
+
+  const fRoot = document.getElementById('factors');
+  FACTORS.forEach(item=>{
+    const row = document.createElement('div');
+    row.className='row checkline';
+    const ck = document.createElement('input'); ck.type='checkbox'; ck.id='fac_'+item.id;
+    const lab = document.createElement('label'); lab.htmlFor=ck.id; lab.textContent=item.label;
+    row.appendChild(ck); row.appendChild(lab);
+    fRoot.appendChild(row);
+  });
+
+  const rRoot = document.getElementById('redflags');
+  REDFLAGS.forEach(item=>{
+    const row = document.createElement('div');
+    row.className='row checkline';
+    const ck = document.createElement('input'); ck.type='checkbox'; ck.id='rf_'+item.id;
+    const lab = document.createElement('label'); lab.htmlFor=ck.id; lab.textContent=item.label;
+    row.appendChild(ck); row.appendChild(lab);
+    rRoot.appendChild(row);
+  });
+}
+buildUI();
+
+/* ========= Расчёт ========= */
+
+function valRadio(name, def=0){
+  const r = document.querySelector(`input[name="${name}"]:checked`);
+  return r ? Number(r.value) : def;
+}
+function isChecked(id){ return document.getElementById(id)?.checked || false }
+
+function calculate(){
+  // Красные флаги?
+  const rf_any = REDFLAGS.some(r => isChecked('rf_'+r.id));
+
+  const age = Number(document.getElementById('age').value || 0);
+  let agePts = 0;
+  if (age>=60) agePts=2; else if (age>=45) agePts=1;
+
+  // Симптомы
+  let symptomPts = 0;
+  const chosenSymptoms = [];
+  SYMPTOMS.forEach(s=>{
+    const v = valRadio('sym_'+s.id,0);
+    symptomPts += v;
+    if (v>0) chosenSymptoms.push({label:s.label, pts:v});
+  });
+
+  // Признаки
+  let signPts = 0;
+  const chosenSigns = [];
+  SIGNS.forEach(s=>{
+    const v = valRadio('sign_'+s.id,0); // 0/1/2
+    const factor = v===2 ? 1 : v===1 ? 0.5 : 0;
+    const pts = s.weight * factor;
+    signPts += pts;
+    if (v>0) chosenSigns.push({label:s.label, pts});
+  });
+
+  // Факторы
+  let factorPts = 0;
+  const chosenFactors = [];
+  FACTORS.forEach(f=>{
+    if (isChecked('fac_'+f.id)){ factorPts += f.pts; chosenFactors.push({label:f.label, pts:f.pts}); }
+  });
+  factorPts += agePts;
+
+  // Итоговые индексы
+  const presenceScore = signPts + Math.min(symptomPts, 4);  // вероятность наличия болезни
+  const totalScore = presenceScore + factorPts/2;            // мягко учитываем фоновые факторы в индексе
+  const presenceCat = presenceScore>=7 ? 'high' : presenceScore>=3 ? 'mid' : 'low';
+  const pct = Math.max(0, Math.min(100, Math.round((presenceScore/12)*100))); // шкала 0..~12
+
+  // Вывод
+  const res = document.getElementById('result');
+  const urgent = document.getElementById('urgent');
+  const ok = document.getElementById('okblock');
+  const badge = document.getElementById('badge');
+  const bar = document.getElementById('bar');
+  const scoreLabel = document.getElementById('scoreLabel');
+  const meaning = document.getElementById('meaning');
+  const advice = document.getElementById('advice');
+  const details = document.getElementById('details');
+
+  res.style.display = 'block';
+
+  if (rf_any){
+    urgent.style.display='block';
+    ok.style.display='none';
+    urgent.innerHTML = 'Есть признаки возможного острого состояния (тромбоз/эмболия). Немедленно обратитесь за неотложной медицинской помощью (скорая/ER). Не откладывайте!';
+    return;
+  } else {
+    urgent.style.display='none';
+    ok.style.display='block';
+  }
+
+  // Бейдж
+  badge.className='badge';
+  if (presenceCat==='low'){ badge.classList.add('b-low'); badge.textContent='Низкая вероятность'; }
+  if (presenceCat==='mid'){ badge.classList.add('b-mid'); badge.textContent='Средняя вероятность'; }
+  if (presenceCat==='high'){ badge.classList.add('b-high'); badge.textContent='Высокая вероятность'; }
+
+  // Полоска
+  bar.style.width = pct+'%';
+  scoreLabel.textContent = `${Math.round(presenceScore)}/12`;
+
+  // Значение
+  if (presenceCat==='low'){
+    meaning.textContent = 'Собранные симптомы/признаки мало характерны для варикозной болезни. Если жалобы сохраняются, обсудите с врачом возможные альтернативные причины (ортопедические, неврологические и т.д.).';
+  } else if (presenceCat==='mid'){
+    meaning.textContent = 'Есть признаки, совместимые с ранними проявлениями хронической венозной недостаточности. Рекомендуется модификация образа жизни и, по возможности, УЗИ вен для уточнения.';
+  } else {
+    meaning.textContent = 'Высока вероятность варикозной болезни/хронической венозной недостаточности. Рекомендуется очная консультация специалиста (флеболог/сосудистый хирург) и дуплексное сканирование вен.';
+  }
+
+  // Советы (динамически по отмеченным пунктам)
+  const tips = new Set();
+  // Базовые рекомендации
+  tips.add('Ходьба ежедневно не менее 30–40 минут; упражнения для икроножных мышц (подъёмы на носки).');
+  tips.add('По возможности используйте медицинский компрессионный трикотаж (класс 1), особенно при нагрузке/перелётах — после консультации врача.');
+  tips.add('Отдых с приподнятыми ногами 10–15 минут 1–2 раза/день.');
+  tips.add('Избегайте длительного непрерывного стояния/сидения; каждые 40–60 минут — 2–3 минуты активных движений.');
+
+  // Таргет по факторам
+  if (isChecked('fac_standing')) tips.add('При работе стоя — микропаузи: перекаты стоп, «насос» стопой, периодическая ходьба.');
+  if (isChecked('fac_sitting')) tips.add('При сидячей работе/поездках — разминка каждые 40–60 минут; круговые движения стопами, перекаты пятка-носок.');
+  if (isChecked('fac_obesity')) tips.add('Контроль массы тела: дефицит 300–500 ккал/день, белок 1–1,2 г/кг, клетчатка 25–30 г/сут.');
+  if (isChecked('fac_pregnancy')) tips.add('Во время беременности — обсудите подбор компрессии с врачом; избегайте тепловых процедур для ног.');
+  if (isChecked('fac_hormones')) tips.add('Приём гормональных контрацептивов/ЗГТ обсудите с врачом на фоне венозных жалоб.');
+  if (isChecked('fac_dvt')) tips.add('Был тромбоз вен — обязательно очно обсудите симптомы с сосудистым хирургом.');
+  if (isChecked('fac_smoke')) tips.add('Отказ от курения снижает сосудистые риски и улучшает симптомы.');
+  if (isChecked('fac_constip')) tips.add('Больше клетчатки и воды для профилактики запоров (овощи, цельные злаки, 1.5–2 л воды/сут).');
+  if (isChecked('fac_lifting')) tips.add('Избегайте подъёма тяжестей; используйте компрессию при нагрузке.');
+  // Таргет по признакам
+  if (valRadio('sign_edema')>0) tips.add('При склонности к отёкам — ограничьте длительное стояние, вечерняя разгрузка ног и компрессия.');
+  if (valRadio('sign_skin')>0 || valRadio('sign_ulcer')>0) tips.add('Кожные изменения/язвы требуют очного осмотра и локальной терапии по назначению врача.');
+
+  advice.innerHTML = '';
+  Array.from(tips).forEach(t=>{
+    const li = document.createElement('li'); li.textContent=t; advice.appendChild(li);
+  });
+
+  // Детали расчёта
+  const reasons = []
+    .concat(chosenSigns.map(o=>`• Признак: ${o.label} (+${o.pts})`))
+    .concat(chosenSymptoms.map(o=>`• Симптом: ${o.label} (+${o.pts})`))
+    .concat(chosenFactors.map(o=>`• Фактор риска: ${o.label} (+${o.pts})`))
+    .concat(agePts? [`• Возраст (+${agePts})`]:[]);
+  const html = `
+    <div><b>Баллы по компонентам:</b></div>
+    <div>Симптомы: <b>${symptomPts}</b>; Признаки: <b>${signPts.toFixed(1)}</b>; Факторы (включая возраст): <b>${factorPts}</b></div>
+    <div style="margin-top:6px"><b>Что повлияло:</b><br>${reasons.length?reasons.join('<br>'):'—'}</div>
+  `;
+  details.innerHTML = html;
+
+  // Сохраняем текст заключения для копирования
+  window._lastConclusion = makeConclusionText({presenceCat, presenceScore, symptomPts, signPts, factorPts, tips:Array.from(tips)});
+  
+  // Показать кнопку консультации для средней и высокой вероятности
+  const consultBtn = document.getElementById('consultBtn');
+  if (presenceCat === 'mid' || presenceCat === 'high') {
+    consultBtn.style.display = 'block';
+  } else {
+    consultBtn.style.display = 'none';
+  }
+}
+
+function makeConclusionText({presenceCat, presenceScore, symptomPts, signPts, factorPts, tips}){
+  const cat = presenceCat==='high' ? 'Высокая' : presenceCat==='mid' ? 'Средняя' : 'Низкая';
+  return [
+    `Вероятность варикозной болезни: ${cat} (индекс ${Math.round(presenceScore)}/12).`,
+    `Балл симптомов: ${symptomPts}; признаков: ${signPts.toFixed(1)}; факторов риска (с возрастом): ${factorPts}.`,
+    `Рекомендации:`,
+    ...tips.map(t=>`— ${t}`)
+  ].join('\n');
+}
+
+function resetAll(){
+  document.getElementById('age').value='';
+  document.getElementById('sex').value='unknown';
+  document.querySelectorAll('input[type="radio"]').forEach(i=>i.checked=false);
+  document.querySelectorAll('input[type="checkbox"]').forEach(i=>i.checked=false);
+  document.getElementById('result').style.display='none';
+}
+
+async function copyConclusion(){
+  const text = window._lastConclusion || 'Сначала выполните расчёт.';
+  try{
+    await navigator.clipboard.writeText(text);
+    alert('Заключение скопировано в буфер обмена.');
+  }catch(e){
+    // Fallback
+    const ta = document.createElement('textarea');
+    ta.value = text; document.body.appendChild(ta); ta.select();
+    try{ document.execCommand('copy'); alert('Заключение скопировано.'); }
+    catch(err){ alert('Скопируйте вручную:\n\n'+text); }
+    ta.remove();
+  }
+}
+
+function showContactForm(){
+  const form = document.getElementById('contactForm');
+  form.style.display = 'block';
+  form.scrollIntoView({ behavior: 'smooth', block: 'start' });
+}
+
+function hideContactForm(){
+  const form = document.getElementById('contactForm');
+  form.style.display = 'none';
+}
+
+function submitContactForm(event){
+  event.preventDefault();
+  const formData = new FormData(event.target);
+  const data = Object.fromEntries(formData.entries());
+  
+  // Здесь можно добавить отправку данных на сервер
+  console.log('Данные формы:', data);
+  
+  // Имитация отправки
+  const submitBtn = event.target.querySelector('button[type="submit"]');
+  const originalText = submitBtn.textContent;
+  submitBtn.textContent = 'Отправляется...';
+  submitBtn.disabled = true;
+  
+  setTimeout(() => {
+    alert('Спасибо за заявку! Мы свяжемся с вами в ближайшее время.');
+    hideContactForm();
+    event.target.reset();
+    submitBtn.textContent = originalText;
+    submitBtn.disabled = false;
+  }, 2000);
+}
+
+// Маска для телефона
+document.addEventListener('DOMContentLoaded', function() {
+  const phoneInput = document.querySelector('input[name="phone"]');
+  if (phoneInput) {
+    phoneInput.addEventListener('input', function(e) {
+      let value = e.target.value.replace(/\D/g, '');
+      if (value.length > 0) {
+        if (value[0] === '8') value = '7' + value.slice(1);
+        if (value[0] !== '7') value = '7' + value;
+      }
+      
+      let formattedValue = '';
+      if (value.length > 0) formattedValue += '+7';
+      if (value.length > 1) formattedValue += ' (' + value.slice(1, 4);
+      if (value.length > 4) formattedValue += ') ' + value.slice(4, 7);
+      if (value.length > 7) formattedValue += '-' + value.slice(7, 9);
+      if (value.length > 9) formattedValue += '-' + value.slice(9, 11);
+      
+      e.target.value = formattedValue;
+    });
+  }
+});
+</script>
+</body>
+</html>
